@@ -36,7 +36,6 @@ createTable();
 // request function
 
 app.get("/", async(req, res) => { // get all task of toDoList
-    await Person.sync();
     let personList = await Person.findAll();
     let content = personList.map(x => x.toJSON())
     res.send(content)
@@ -45,7 +44,6 @@ app.get("/", async(req, res) => { // get all task of toDoList
 app.post("/", async(req, res) => { // post and  create a new task
 
     if (isValidTask(req.body)) {
-        await Person.sync();
         await Person.create({ title: req.body.title, completed: req.body.completed });
         res.status(200)
     } else {
@@ -59,7 +57,6 @@ app.put("/:id", async(req, res) => { // put  upgrate a task
     !/^[0-9]+$/.test(req.params.id) && res.status(400).send(" Invalid ID format supplied")
 
     if (isValidTask(req.body)) {
-        await Person.sync();
         await Person.update({ completed: req.body.completed }, { where: { id: req.params.id } });
         res.status(200)
     } else {
