@@ -66,7 +66,6 @@ document.getElementById("toDoList").addEventListener("click", function(e) {
             "completed": e.path[0].checked
         }
         updateTask(idOfTask, updateData)
-
     }
 });
 
@@ -79,7 +78,6 @@ document.getElementById("myInput").addEventListener("keyup", function(e) {
     if (e.code == "Enter" && data.title !== "") {
         document.getElementById("myInput").value = ""
         postTask(data)
-        getToDoList()
     }
 });
 
